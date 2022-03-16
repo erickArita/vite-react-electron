@@ -1,5 +1,5 @@
 {
-  "name": "vite-react-electron",
+  "name": "Vision",
   "productName": "Electron",
   "private": true,
   "version": "1.0.0",
@@ -15,7 +15,8 @@
     "node": ">=14.17.0"
   },
   "dependencies": {
-    "electron-store": "^8.0.1"
+    "electron-store": "^8.0.1",
+    "nedb-promises": "^6.0.3"
   },
   "devDependencies": {
     "@types/react": "^17.0.40",
