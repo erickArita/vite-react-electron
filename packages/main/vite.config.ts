@@ -23,7 +23,7 @@ export default defineConfig({
     rollupOptions: {
       external: [
         'electron',
-        'nedb-promises',
+        // 'nedb-promises',
         ...builtinModules,
         ...Object.keys(pkg.dependencies || {}),
       ],

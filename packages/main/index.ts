@@ -1,12 +1,11 @@
 import { app, BrowserWindow, shell } from 'electron'
 import { release } from 'os'
 import { join } from 'path'
+import './data/connection/connection'
 import './samples/electron-store'
-import './samples/node-fetch'
 import './samples/execa'
-import { db } from './data/connection/connection'
-
-db.insert({ name: 'foo' })
+import './samples/node-fetch'
+import './router/router'
 
 // Disable GPU Acceleration for Windows 7
 if (release().startsWith('6.1')) app.disableHardwareAcceleration()
@@ -18,6 +17,8 @@ if (!app.requestSingleInstanceLock()) {
   app.quit()
   process.exit(0)
 }
+
+
 
 let win: BrowserWindow | null = null
 

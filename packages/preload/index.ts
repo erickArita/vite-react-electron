@@ -3,9 +3,8 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { domReady } from './utils'
 import { useLoading } from './loading'
 
-const { appendLoading, removeLoading } = useLoading()
-
-;(async () => {
+const { appendLoading, removeLoading } = useLoading();
+(async () => {
   await domReady()
 
   appendLoading()
@@ -15,6 +14,16 @@ const { appendLoading, removeLoading } = useLoading()
 contextBridge.exposeInMainWorld('fs', fs)
 contextBridge.exposeInMainWorld('removeLoading', removeLoading)
 contextBridge.exposeInMainWorld('ipcRenderer', withPrototype(ipcRenderer))
+
+
+contextBridge.exposeInMainWorld('api', {
+  invoke: (event: string, ...args: any[]) => {
+    return ipcRenderer.invoke(event, ...args)
+  },
+  on: (event: string, listener: (...args: any[]) => void) => {
+    ipcRenderer.on(event, listener)
+  },
+})
 
 // `exposeInMainWorld` can't detect attributes and methods of `prototype`, manually patching it.
 function withPrototype(obj: Record<string, any>) {
